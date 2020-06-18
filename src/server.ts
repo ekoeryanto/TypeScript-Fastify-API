@@ -1,22 +1,24 @@
-import errorHandler from "errorhandler";
+import fastify from "fastify";
+import pinoms from "pino-multi-stream";
+import dotenv from "dotenv";
+import { app } from "./app";
 
-import app from "./app";
+dotenv.config();
 
-/**
- * Error Handler. Provides full stack - remove for production
- */
-app.use(errorHandler());
+const { ADDRESS = "127.0.0.1", PORT, TRUST_PROXY } = process.env;
 
-/**
- * Start Express server.
- */
-const server = app.listen(app.get("port"), () => {
-    console.log(
-        "  App is running at http://localhost:%d in %s mode",
-        app.get("port"),
-        app.get("env")
-    );
-    console.log("  Press CTRL-C to stop\n");
+const streams: pinoms.Streams = [
+  { stream: process.stdout }, // an "info" level destination stream
+  { level: "error", stream: process.stderr } // an "error" level destination stream
+];
+
+const server = fastify({
+  logger: pinoms({ streams }),
+  trustProxy: TRUST_PROXY || ADDRESS
 });
+
+server.register(app);
+
+server.listen(+PORT, ADDRESS);
 
 export default server;
