@@ -1,15 +1,17 @@
-import { join } from "path";
-import { FastifyInstance } from "fastify";
-import Autoload from "fastify-autoload";
-import about from "./plugins/about.plugin";
-import { FastifyPluginOptions } from "fastify";
+import { join } from 'path';
+import { FastifyInstance, FastifyPluginOptions } from 'fastify';
+import Autoload from 'fastify-autoload';
+import about from './plugins/about.plugin';
 
-export function app(fastify: FastifyInstance, opts: FastifyPluginOptions, next: CallableFunction) {
-
+export function app(
+  fastify: FastifyInstance,
+  opts: FastifyPluginOptions,
+  next: CallableFunction,
+) {
   /* istanbul ignore next */
-  if (process.env.NODE_ENV !== "test") {
+  if (process.env.NODE_ENV !== 'test') {
     fastify.register(Autoload, {
-      dir: join(__dirname, "services")
+      dir: join(__dirname, 'services'),
     });
   }
 
@@ -17,3 +19,5 @@ export function app(fastify: FastifyInstance, opts: FastifyPluginOptions, next: 
 
   next();
 }
+
+export default app;

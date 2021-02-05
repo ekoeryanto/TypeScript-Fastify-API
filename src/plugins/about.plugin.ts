@@ -1,29 +1,19 @@
-import { FastifyPlugin } from "fastify";
-import fp from "fastify-plugin";
+import { FastifyPluginCallback } from 'fastify';
+import fp from 'fastify-plugin';
 
-import * as pkg from "../../package.json";
-
-declare module "fastify" {
+declare module 'fastify' {
   interface FastifyInstance {
-    name: string
+    author: string | Record<string, string>
   }
-  interface FastifyRequest {
-    desc: () => string
-  }
-  interface FastifyReply {
-    author: () => any
-  }
- }
+}
 
 //  define options
- export interface AboutOptions {
+export interface AboutOptions {
   sensitive?: string
- }
+}
 
-const about: FastifyPlugin<AboutOptions> = (app, options, done) => {
-  app.decorate("name", pkg.name);
-  app.decorateRequest("desc", () => pkg.description);
-  app.decorateReply("author", () => pkg.author);
+const about: FastifyPluginCallback<AboutOptions> = (app, options, done) => {
+  app.decorate('author', 'Eko Eryanto <ekoeryanto@gmail.com>');
 
   done();
 };

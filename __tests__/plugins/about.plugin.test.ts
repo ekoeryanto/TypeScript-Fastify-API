@@ -1,6 +1,5 @@
-import fastify from "fastify";
-import about from "../../src/plugins/about.plugin";
-import pkg from "../../package.json";
+import fastify from 'fastify';
+import about from '../../src/plugins/about.plugin';
 
 const app = fastify();
 
@@ -9,16 +8,8 @@ afterAll(() => {
   app.close();
 });
 
-describe("About Plugin", () => {
-  it("decorate name to main instance", () => {
-    expect(app.name).toBe(pkg.name);
-  });
-
-  it("decorate desc to request", () => {
-    expect(app.hasRequestDecorator("desc")).toBeTruthy();
-  });
-
-  it("decorate author to reply", () => {
-    expect(app.hasReplyDecorator("author")).toBeTruthy();
+describe('About Plugin', () => {
+  it('decorate author to main instance', () => {
+    expect(app.author).toBe('Eko Eryanto <ekoeryanto@gmail.com>');
   });
 });

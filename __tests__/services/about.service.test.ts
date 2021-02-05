@@ -1,6 +1,6 @@
-import { FastifyInstance } from "fastify";
-import { createServer } from "../helper";
-import about from "../../src/services/about";
+import { FastifyInstance } from 'fastify';
+import { createServer } from '../helper';
+import about from '../../src/services/about';
 
 let app: FastifyInstance;
 
@@ -10,20 +10,16 @@ beforeAll(() => {
 });
 afterAll(() => app.close());
 
-describe("About Service", () => {
-
-  test("GET /about", async () => {
-    const about = await app.inject({
-      method: "GET",
-      url: "/about"
+describe('About Service', () => {
+  test('GET /about', async () => {
+    const res = await app.inject({
+      method: 'GET',
+      url: '/about',
     });
 
-    expect(about.statusCode).toBe(200);
-    expect(JSON.parse(about.payload)).toEqual(expect.objectContaining({
-      name: expect.any(String),
-      desc: expect.any(String),
-      author: expect.any(String)
+    expect(res.statusCode).toBe(200);
+    expect(JSON.parse(res.payload)).toEqual(expect.objectContaining({
+      author: expect.any(String),
     }));
   });
-
 });
