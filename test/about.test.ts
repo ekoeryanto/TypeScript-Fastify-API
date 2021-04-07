@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import { createServer } from '../tester';
-import about from './about';
+import { createServer } from './tester';
+import about from '../src/services/about';
 
 let app: FastifyInstance;
 

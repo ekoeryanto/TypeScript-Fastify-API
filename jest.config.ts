@@ -2,9 +2,14 @@ import { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
   clearMocks: true,
-  roots: ['<rootDir>/src'],
+  preset: "ts-jest",
+  roots: ['<rootDir>/test'],
   testEnvironment: 'node',
-  preset: 'ts-jest'
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json'
+    }
+  }
 };
 
 export default config;

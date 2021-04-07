@@ -1,6 +1,6 @@
 import fastify, { FastifyInstance } from 'fastify';
 import plug from 'fastify-plugin';
-import { app } from './app';
+import { app } from '../src/app';
 
 export function config() {
   return {};
