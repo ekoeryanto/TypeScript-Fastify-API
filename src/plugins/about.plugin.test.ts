@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import about from '../../src/plugins/about.plugin';
+import about from './about.plugin';
 
 const app = fastify();
 

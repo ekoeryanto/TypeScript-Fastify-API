@@ -1,17 +1,10 @@
 import { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
-  moduleFileExtensions: [
-    'ts',
-    'js',
-  ],
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-  },
-  testMatch: [
-    '**/__tests__/**/*.test.(ts|js)',
-  ],
+  clearMocks: true,
+  roots: ['<rootDir>/src'],
   testEnvironment: 'node',
+  preset: 'ts-jest'
 };
 
 export default config;
